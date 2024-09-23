@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Welcome to the To-Do List App!</h1>
+    <p class="text-center">Manage your tasks efficiently and easily.</p>
+    <div class="text-center">
+        <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+        <a href="{% url 'register' %}" class="btn btn-secondary">Register</a>
+    </div>
+</div>
+{% endblock %}

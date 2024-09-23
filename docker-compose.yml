@@ -1,0 +1,43 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ToDoList
+      POSTGRES_USER: yahia
+      POSTGRES_PASSWORD: yahia
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile.api
+    volumes:
+      - .:/TO_DO_List_project
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  public:
+    build:
+      context: .
+      dockerfile: public/Dockerfile.front
+    volumes:
+      - .:/TO_DO_List_project
+    ports:
+      - "8001:8000"
+    depends_on:
+      - db
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - public
+
+volumes:
+  postgres_data:
