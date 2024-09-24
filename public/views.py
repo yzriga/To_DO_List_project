@@ -15,7 +15,7 @@ def register_view(request):
             form.save()
             return redirect('login')
         else:
-            print(form.errors)  # Affiche les erreurs dans la console
+            print(form.errors)  # pour afficher les erreurs dans la console
     else:
         form = UserCreationForm()
     return render(request, 'public/register.html', {'form': form})
